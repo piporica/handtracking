@@ -124,12 +124,8 @@ void cameraInit()
 	cout << screenW << " " << screenH << endl;
 }
 
-bool ReadingOBJ(char* bmpfilename, char* objfilename)
+bool ReadingOBJ(char* bmpfilename, char* objfilename, Vertex* &vertex, Vertex* &vertex_color, MMesh* &mymesh, int fish)
 {
-	vertex = new Vertex[100000];
-	vertex_color = new Vertex[100000];
-	mymesh = new MMesh[100000];
-
 	//비트맵 정보 읽기
 
 	int i, j, k = 0;
@@ -149,11 +145,21 @@ bool ReadingOBJ(char* bmpfilename, char* objfilename)
 	for (i = 0; i < width; i++)
 	{
 		for (j = 0; j < height; j++)
-		{
-			mytexels[i][j][0] = data[k * 3 + 2];
-			mytexels[i][j][1] = data[k * 3 + 1];
-			mytexels[i][j][2] = data[k * 3];
-			k++;
+		{ 
+			if (fish == 1)
+			{
+				Fmytexels[i][j][0] = data[k * 3 + 2];
+				Fmytexels[i][j][1] = data[k * 3 + 1];
+				Fmytexels[i][j][2] = data[k * 3];
+				k++;
+			}
+			else
+			{
+				Dmytexels[i][j][0] = data[k * 3 + 2];
+				Dmytexels[i][j][1] = data[k * 3 + 1];
+				Dmytexels[i][j][2] = data[k * 3];
+				k++;
+			}
 		}
 	}
 	
@@ -168,7 +174,6 @@ bool ReadingOBJ(char* bmpfilename, char* objfilename)
 	// 파일 읽기 시작
 	float x, y, z;
 	int x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4;
-
 	int vcount = 0;
 	int vtcount = 0;
 	int fcount = 0;
@@ -223,57 +228,108 @@ bool ReadingOBJ(char* bmpfilename, char* objfilename)
 
 		}
 	}
-	
+	cout <<"mymesh 1" << mymesh[1].V1 << ' ' << mymesh[1].V2 << ' ' << mymesh[1].V3 << ' ' << mymesh[1].V4 << endl;
+
+	cout << "vertex 1" << vertex[1].X << ' ' << vertex[1].Y << ' ' << vertex[1].Z << endl;
+	cout << "vertex_color 1" << vertex[1].X << ' ' << vertex[1].Y << endl;
+
 	fclose(file);
 	
 	return true;
 }
 
-void DrawOBJ(double scale)
+void DrawOBJ(double scale, Vertex* &vertex, Vertex* &vertex_color, MMesh* &mymesh)
 {
 	
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	GLfloat diffuse0[4] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat ambient0[4] = { 0.5, 0.5, 0.5, 1.0 };
-	GLfloat specular0[4] = { 1.0, 1.0, 1.0, 1.0 };
-	GLfloat light0_pos[4] = { 2.0, 2.0, 2.0, 1.0 };
 
-	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
-	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient0);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse0);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, specular0);
+	if (isFish)
+	{
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		GLfloat diffuse0[4] = { 1.0, 1.0, 1.0, 1.0 };
+		GLfloat ambient0[4] = { 0.5, 0.5, 0.5, 1.0 };
+		GLfloat specular0[4] = { 1.0, 1.0, 1.0, 1.0 };
+		GLfloat light0_pos[4] = { 2.0, 2.0, 2.0, 1.0 };
+
+		glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
+		glLightfv(GL_LIGHT0, GL_AMBIENT, ambient0);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse0);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, specular0);
 
 
-	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.2);
-	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.1);
-	glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.05);
+		glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.2);
+		glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.1);
+		glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.05);
 
-	//빨간색 플라스틱과 유사한 재질을 다음과 같이 정의
-	GLfloat mat_ambient[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
-	GLfloat mat_diffuse[4] = { 0.6f, 0.6f, 0.6f, 1.0f };
-	GLfloat mat_specular[4] = { 0.8f, 0.6f, 0.6f, 1.0f };
-	GLfloat mat_shininess = 32.0;
+		//빨간색 플라스틱과 유사한 재질을 다음과 같이 정의
+		GLfloat mat_ambient[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
+		GLfloat mat_diffuse[4] = { 0.6f, 0.6f, 0.6f, 1.0f };
+		GLfloat mat_specular[4] = { 0.8f, 0.6f, 0.6f, 1.0f };
+		GLfloat mat_shininess = 32.0;
 
-	// 폴리곤의 앞면의 재질을 설정 
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-	glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
-	
+		// 폴리곤의 앞면의 재질을 설정 
+		glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+		glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels);
+		glTexImage2D(GL_TEXTURE_2D, 0, 3, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, Fmytexels);
+	}
+	else
+	{
+		glEnable(GL_LIGHTING);
+		glEnable(GL_LIGHT0);
+		GLfloat diffuse0[4] = { 1.0, 1.0, 1.0, 1.0 };
+		GLfloat ambient0[4] = { 0.5, 0.5, 0.5, 1.0 };
+		GLfloat specular0[4] = { 1.0, 1.0, 1.0, 1.0 };
+		GLfloat light0_pos[4] = { 1.0, 1.0, 1.0, 1.0 };
+
+		glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
+		glLightfv(GL_LIGHT0, GL_AMBIENT, ambient0);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse0);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, specular0);
+
+
+		glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.2);
+		glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.1);
+		glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.05);
+
+		//파란색 플라스틱과 유사한 재질을 다음과 같이 정의
+		GLfloat mat_ambient[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
+		GLfloat mat_diffuse[4] = { 0.6f, 0.6f, 0.7f, 1.0f };
+		GLfloat mat_specular[4] = { 0.6f, 0.6f, 0.8f, 1.0f };
+		GLfloat mat_shininess = 32.0;
+
+		// 폴리곤의 앞면의 재질을 설정 
+		glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+		glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
+
+		glTexImage2D(GL_TEXTURE_2D, 0, 3, 1024, 1024, 0, GL_RGB, GL_UNSIGNED_BYTE, Dmytexels);
+	}
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-
 	glEnable(GL_TEXTURE_2D);
 
 	glBegin(GL_QUADS);
-	for (int jj = 0; jj < 24960; jj++)
+
+	int fcount;
+	if (isFish)
+	{
+		fcount = 24960;
+	}
+	else
+	{
+		fcount = 7336;
+	}
+
+
+	for (int jj = 0; jj < fcount; jj++)
 	{
 		glTexCoord2d(vertex_color[mymesh[jj].T1 - 1].X, vertex_color[mymesh[jj].T1 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V1 - 1].X * scale, vertex[mymesh[jj].V1 - 1].Y* scale, vertex[mymesh[jj].V1 - 1].Z* scale);
@@ -286,6 +342,14 @@ void DrawOBJ(double scale)
 	}
 
 	glEnd();
+}
+
+void OBJChange(int state)
+{
+	if (stillnothing)
+	{
+		isFish = !isFish;
+	}
 }
 
 void display()
@@ -316,6 +380,9 @@ void display()
 	handPosition hp;
 	if (Handpos.getHandPosition(img_cam, hp))
 	{
+		timechecking = false;
+		stillnothing = false;
+
 		cout << "ok";
 		glDisable(GL_TEXTURE_2D);
 		glPushMatrix();
@@ -347,14 +414,34 @@ void display()
 			anglecount = 0;
 		}
 
-		glRotatef(hp.rotateXY-90, 0, 0, -1.0);
 		//glRotatef(cubeAngle, 0.0, 1.0, 0.0);
 		//draw_cube(hp.Slength*0.005); //큐브
-		DrawOBJ(0.0008*hp.Slength); //물고기
+
+		if (isFish)
+		{
+			glRotatef(hp.rotateXY - 90, 0, 0, -1.0);
+			glRotatef(cubeAngle, 0, 1.0, 1.0);
+			DrawOBJ(0.0008 * hp.Slength, Fvertex, Fvertex_color, Fmymesh); //물고기
+		}
+		else
+		{
+			glRotatef(hp.rotateXY, 0, 0, -1.0);
+			glRotatef(cubeAngle, 1.0, 1.0, 0);
+			DrawOBJ(0.00006* hp.Slength, Dvertex, Dvertex_color, Dmymesh); //고래 
+		}
 		glPopMatrix();
 	}
 	//cout << hp.center;
-
+	else
+	{
+		if (!timechecking)
+		{
+			timechecking = true;
+			stillnothing = true;
+			//2초 후에 바꾸는 함수 호출
+			glutTimerFunc(1000, OBJChange, 0);
+		}
+	}
 	glutSwapBuffers();
 }
 
@@ -425,10 +512,19 @@ int main(int argc, char** argv)
 	glutInitWindowPosition(100, 100); //윈도우의 위치 (x,y)
 	glutCreateWindow("OpenGL Example"); //윈도우 생성
 
-	char* bmpf = (char*)("./obj-fish/13001_Ryukin_Goldfish_diff.bmp");
-	char* objf = (char*)("./obj-fish/13001_Ryukin_Goldfish_v1_L3.obj");
-	ReadingOBJ(bmpf, objf);//obj 읽기
+	//
+	anglecount = -1;
+	isFish = true;
 
+	char* fish_bmpf = (char*)("./obj-fish/13001_Ryukin_Goldfish_diff.bmp");
+	char* fish_objf = (char*)("./obj-fish/13001_Ryukin_Goldfish_v1_L3.obj");
+	ReadingOBJ(fish_bmpf, fish_objf, Fvertex, Fvertex_color, Fmymesh, 1);//obj 읽기
+	
+	char* bird_bmpf = (char*)("./obj-dp/10014_dolphin_v1_Diffuse.bmp");
+	char* bird_objf = (char*)("./obj-dp/10014_dolphin_v2_max2011_it2.obj");
+	ReadingOBJ(bird_bmpf, bird_objf, Dvertex, Dvertex_color, Dmymesh, 0);//obj 읽기
+
+	
 	init();
 
 	//디스플레이 콜백 함수 등록, display함수는 윈도우 처음 생성할 때와 화면 다시 그릴 필요 있을때 호출된다. 
@@ -446,9 +542,13 @@ int main(int argc, char** argv)
 	glutMainLoop();
 
 
-	delete[] vertex;
-	delete[] mymesh;
-	delete[] vertex_color;
+	delete[] Fvertex;
+	delete[] Fmymesh;
+	delete[] Fvertex_color;
+
+	delete[] Dvertex;
+	delete[] Dmymesh;
+	delete[] Dvertex_color;
 
 	return 0;
 }

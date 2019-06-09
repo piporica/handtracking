@@ -37,10 +37,11 @@ struct handPosition
 	double rotateZ; //돌아간 방향으로의 회전
 };
 
+bool isFish;
 
 //각도 튀는거 방지
 double prevangle;
-int anglecount = -1;
+int anglecount;
 
 //obj 읽기 관련
 
@@ -64,8 +65,19 @@ struct MMesh {
 	int T4;
 };
 
-Vertex* vertex;
-Vertex* vertex_color;
-MMesh* mymesh;
+//fish
+Vertex *Fvertex = new Vertex[100000];
+Vertex *Fvertex_color = new Vertex[100000];;
+MMesh *Fmymesh = new MMesh[100000];
 
-GLubyte mytexels[1024][1024][3];
+Vertex *Dvertex = new Vertex[100000];
+Vertex *Dvertex_color = new Vertex[100000];
+MMesh *Dmymesh = new MMesh[100000];
+
+GLubyte Fmytexels[1024][1024][3];
+GLubyte Dmytexels[1024][1024][3];
+
+//바꾸기 타이머 - 2초간 없으면 도형 바꿈 
+int changtimer;
+bool timechecking; //계속 타이머 돌아가는 것 방지용
+bool stillnothing; //2초 후에도 없니

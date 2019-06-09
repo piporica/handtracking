@@ -62,15 +62,19 @@ C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(33): warn
 C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(34): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(35): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(36): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(248): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(249): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(250): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(279): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(281): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(283): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(285): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(311): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(322): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(322): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(350): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(260): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(261): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(262): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(293): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(294): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(295): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(335): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(337): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(339): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(341): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(375): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(389): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(389): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(422): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(428): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   handtracking.vcxproj -> C:\Users\r_bre\source\repos\handtracking\x64\Debug\handtracking.exe
