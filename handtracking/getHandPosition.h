@@ -233,32 +233,33 @@ private :
 			rimit--;
 			if (rimit == 0) break;
 		}
-
-		rimit = 10; //한계상수 초기화
-
-		//먼저 체크
-		for (int i = 0; i < crossPoints.size(); i++)
+		if (rimit != 0)
 		{
-			if (findangle(crossPoints[i], hull_center, FarCenter) > 120) over120++;
-		}
-		//만족할때까지 scale 늘리기
-		while (over120 < 2)
-		{
-			scale += 0.3;
-			over120 = 0;
-
-			crossPoints.resize(2000);
-			checkcross(scale, crossPoints);
+			rimit = 10; //한계상수 초기화
 			for (int i = 0; i < crossPoints.size(); i++)
 			{
 				if (findangle(crossPoints[i], hull_center, FarCenter) > 120) over120++;
 			}
+			//만족할때까지 scale 늘리기
+			while (over120 < 2)
+			{
+				scale += 0.3;
+				over120 = 0;
 
-			rimit--;
-			if (rimit == 0) {
-				break;
+				crossPoints.resize(2000);
+				checkcross(scale, crossPoints);
+				for (int i = 0; i < crossPoints.size(); i++)
+				{
+					if (findangle(crossPoints[i], hull_center, FarCenter) > 120) over120++;
+				}
+
+				rimit--;
+				if (rimit == 0) {
+					break;
+				}
 			}
 		}
+
 
 		vector<Point> cut(_selecthull.size() + 1);
 		RotatedRect rect;

@@ -173,8 +173,8 @@ void display()
 		cout << "ok";
 		glDisable(GL_TEXTURE_2D);
 		glPushMatrix();
-		glTranslatef(0.0, 0.0, -5.712);
-		//glRotatef(cubeAngle, 1.0, 1.0, 1.0);
+		glTranslatef((hp.center.x-320)*0.01, (hp.center.y-240)*-0.01, -5.712);
+		glRotatef(cubeAngle, 1.0, 1.0, 1.0);
 		draw_cube(); //큐브
 		draw_line();  //좌표축
 		glPopMatrix();
