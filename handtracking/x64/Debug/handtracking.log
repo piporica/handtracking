@@ -11,47 +11,47 @@ C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(148): wa
           [
               _Tp=int
           ]
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(183): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(197): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(207): warning C4267: '=': 'size_t'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(192): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(206): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(216): warning C4267: '=': 'size_t'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Tp=int
           ]
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(208): warning C4267: '=': 'size_t'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(217): warning C4267: '=': 'size_t'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Tp=int
           ]
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(223): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(241): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(311): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(362): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-          with
-          [
-              _Tp=int
-          ]
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(363): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-          with
-          [
-              _Tp=int
-          ]
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(373): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-          with
-          [
-              _Tp=int
-          ]
-C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(374): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-          with
-          [
-              _Tp=int
-          ]
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(231): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(247): warning C4305: '+=': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(328): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(379): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Tp=int
           ]
 C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(380): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(390): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(391): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(396): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(397): warning C4244: '=': 'float'에서 '_Tp'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
               _Tp=int
@@ -64,4 +64,5 @@ C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(35): warn
 C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(36): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(176): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
 C:\Users\r_bre\source\repos\handtracking\handtracking\handtracking.cpp(188): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\r_bre\source\repos\handtracking\handtracking\getHandPosition.h(200): warning C4715: 'handpos::getRealcenterPoint': 모든 제어 경로에서 값을 반환하지는 않습니다.
   handtracking.vcxproj -> C:\Users\r_bre\source\repos\handtracking\x64\Debug\handtracking.exe

@@ -34,7 +34,7 @@ private :
 	Point FarCenter;
 	Point SECenter;
 	Point SECenter_adv;
-	int whatline[50];
+	int whatline[200];
 	
 	handPosition result;
 
@@ -132,13 +132,13 @@ private :
 		return true;
 	}
 
-	void getRealcenterPoint()
+	bool getRealcenterPoint()
 	{
 		int sumFarCenterX = 0, sumFarCenterY = 0;
 		int sumSECenterX = 0, sumSECenterY = 0;
 
 		int count = 0;
-		Point selectFars[10];
+		Point selectFars[20] = {Point(0,0)};
 
 
 		for (int i = 0; i < _selectdefects.size(); i++)
@@ -146,8 +146,7 @@ private :
 
 			const Vec4i& v = _selectdefects[i];
 			float depth = v[3];
-			cout << depth << endl;
-			if (depth > 1500) //  filter defects by depth, e.g more than 10
+			if (depth > 1500 && count < 20) //  filter defects by depth, e.g more than 10
 			{
 				int startidx = v[0]; Point ptStart(_selectContours[startidx]);
 				int endidx = v[1]; Point ptEnd(_selectContours[endidx]);
@@ -162,6 +161,16 @@ private :
 
 				count++;
 			}
+		}
+		if (count < 5)
+		{
+			cout << "깊이 모자람";
+			return false;
+		}
+		if (count > 15)
+		{
+			cout << "많아;";
+			return false;
 		}
 		FarCenter.x = sumFarCenterX / count;
 		FarCenter.y = sumFarCenterY / count;
@@ -209,7 +218,7 @@ private :
 
 
 		//교차점 구하기 
-		vector<Point> crossPoints(50);
+		vector<Point> crossPoints(200);
 
 
 		int rimit = 10;//무한방지용 상수 - 손목 없을 수도 있으니까
@@ -219,7 +228,6 @@ private :
 
 		while (crosscount < 2)
 		{
-			cout << scale;
 			scale += 0.3;
 			crosscount = checkcross(scale, crossPoints);
 			rimit--;
@@ -231,29 +239,38 @@ private :
 		//먼저 체크
 		for (int i = 0; i < crossPoints.size(); i++)
 		{
-			cout << i << endl;
-			cout << "angle : " << findangle(crossPoints[i], hull_center, FarCenter) << endl;
 			if (findangle(crossPoints[i], hull_center, FarCenter) > 120) over120++;
 		}
 		//만족할때까지 scale 늘리기
 		while (over120 < 2)
 		{
 			scale += 0.3;
-			crosscount = checkcross(scale, crossPoints);
 			over120 = 0;
+
+			crossPoints.resize(2000);
+			checkcross(scale, crossPoints);
 			for (int i = 0; i < crossPoints.size(); i++)
 			{
-				cout << i << endl;
-				cout << "angle : " << findangle(crossPoints[i], hull_center, FarCenter) << endl;
 				if (findangle(crossPoints[i], hull_center, FarCenter) > 120) over120++;
 			}
-			rimit--;
-			if (rimit == 0) break;
-		}
-		vector<Point> cut(_selecthull.size());
-		cutcunvexhull(crossPoints, cut);
 
-		RotatedRect rect = minAreaRect(cut);
+			rimit--;
+			if (rimit == 0) {
+				break;
+			}
+		}
+
+		vector<Point> cut(_selecthull.size() + 1);
+		RotatedRect rect;
+		if (rimit != 0)
+		{
+			cutcunvexhull(crossPoints, cut);
+			rect = minAreaRect(cut);
+		}
+		else
+		{
+			rect = minAreaRect(_selecthull);
+		}
 		Point2f vertices[4];
 		rect.points(vertices);
 
@@ -415,6 +432,12 @@ private :
 
 	void cutcunvexhull(vector<Point>crossPoints, vector<Point> & rstList)
 	{
+
+		for (int i = 0; i < _selecthull.size(); i++)
+		{
+			rstList[i] = _selecthull[i];
+		}
+
 		//각도(120 이상)제일 큰 거 두개 고르기 (없음말기)
 		//if 140 이상인게 세 개라면 그중 양 끝거로 <- 나중에
 		//직선방정식 세우기
@@ -445,7 +468,12 @@ private :
 				over120++;
 			}
 		}
-		if (over120 < 2) return;
+		if (over120 < 2)
+		{
+			rstList.resize(_selecthull.size());
+			return;
+		}
+
 
 		//직선방정식 세우기 
 		Point max1 = crossPoints[maxAngleindex[0]];
@@ -485,6 +513,7 @@ private :
 				listcount++;
 			}
 		}
+		rstList.resize(listcount);
 	}
 
 
@@ -500,9 +529,9 @@ public:
 
 			//업그레이드 가능한 부분... 상수값으로 안하고 조정하기
 			int minCr = 133; //128 
-			int maxCr = 180;
+			int maxCr = 175;
 			int minCb = 78; //73
-			int maxCb = 139;
+			int maxCb = 134;
 
 			//opencv를 이용해서 중점과 사각형을 구한다
 			cvtColor(frame, YCrCbframe, COLOR_RGB2YCrCb);
@@ -513,24 +542,25 @@ public:
 			morphologyEx(usemask, closed, MORPH_CLOSE, Mat(5, 5, CV_8U, Scalar(1)));
 			erode(closed, eroded, Mat(3, 3, CV_8U, Scalar(1)), Point(-1, -1), 2); //침식
 
-
 			//구멍 채우기
-			//cvFillHoles(eroded);
+			cvFillHoles(eroded);
+
+			imshow("check", eroded);
+
 
 			//컨벡스 설정 
 			if (!findConvex(eroded)) 
 				return false;
 
-			/*
+			
 			//defect의 중점 / hull의 중점 구하기
-			getRealcenterPoint();
+			if (!getRealcenterPoint())
+				return false;
 
+			
 			//도형 자르고 사각형 구하기
-			return(GetRealConvexhull(eroded));
-			*/
-
-			handPosition temp;
-			result =  temp;
+		
+			result = GetRealConvexhull(eroded);
 
 			return true;
 
