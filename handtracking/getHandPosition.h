@@ -134,6 +134,7 @@ private :
 
 	bool getRealcenterPoint()
 	{
+
 		int sumFarCenterX = 0, sumFarCenterY = 0;
 		int sumSECenterX = 0, sumSECenterY = 0;
 
@@ -197,6 +198,7 @@ private :
 			}
 		}
 		_Fars = Fars;
+		return true;
 	}
 
 	handPosition GetRealConvexhull(Mat & input)
@@ -205,7 +207,6 @@ private :
 
 		float scale = 1.2; // 교차점이 0개면 늘려야 함
 
-		cout << _selecthull.size();
 
 		for (int i = 0; i < _selecthull.size(); i++)
 		{
@@ -226,9 +227,11 @@ private :
 		int crosscount = checkcross(scale, crossPoints);
 		int over120 = 0; //120도 넘는게 2개는 있어야 통과
 
+		cout << "또?;";
 		while (crosscount < 2)
 		{
 			scale += 0.3;
+			crossPoints.resize(2000);
 			crosscount = checkcross(scale, crossPoints);
 			rimit--;
 			if (rimit == 0) break;
@@ -239,6 +242,7 @@ private :
 			for (int i = 0; i < crossPoints.size(); i++)
 			{
 				if (findangle(crossPoints[i], hull_center, FarCenter) > 120) over120++;
+
 			}
 			//만족할때까지 scale 늘리기
 			while (over120 < 2)
@@ -247,31 +251,34 @@ private :
 				over120 = 0;
 
 				crossPoints.resize(2000);
-				checkcross(scale, crossPoints);
+				crosscount = checkcross(scale, crossPoints);
 				for (int i = 0; i < crossPoints.size(); i++)
 				{
 					if (findangle(crossPoints[i], hull_center, FarCenter) > 120) over120++;
 				}
-
 				rimit--;
 				if (rimit == 0) {
+
 					break;
 				}
 			}
 		}
-
+		if (crosscount < 2) rimit = 0;
 
 		vector<Point> cut(_selecthull.size() + 1);
 		RotatedRect rect;
 		if (rimit != 0)
 		{
+			cout << "또1;";
 			cutcunvexhull(crossPoints, cut);
 			rect = minAreaRect(cut);
 		}
 		else
 		{
+			cout << "또2;";
 			rect = minAreaRect(_selecthull);
 		}
+
 		Point2f vertices[4];
 		rect.points(vertices);
 
@@ -285,9 +292,11 @@ private :
 
 		//사이즈 지정
 		double dst1 =
-			sqrt((vertices[0].x - vertices[1].x * vertices[0].x - vertices[1].x) + (vertices[0].y - vertices[1].y * vertices[0].y - vertices[1].y));
+			sqrt((vertices[0].x - vertices[1].x) * (vertices[0].x - vertices[1].x) 
+				+ (vertices[0].y - vertices[1].y) * (vertices[0].y - vertices[1].y));
 		double dst2 =
-			sqrt((vertices[1].x - vertices[2].x * vertices[1].x - vertices[2].x) + (vertices[1].y - vertices[2].y * vertices[1].y - vertices[2].y));
+			sqrt((vertices[1].x - vertices[2].x) * (vertices[1].x - vertices[2].x)
+				+ (vertices[1].y - vertices[2].y) * (vertices[1].y - vertices[2].y));
 
 		if (dst1 >= dst2)
 		{

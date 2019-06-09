@@ -39,62 +39,62 @@ void draw_background()
 
 
 //큐브의 한 면, 화면 안쪽 방향인 -Z축방향으로 0.5이동하여 정사각형을 그린다.
-static void cubebase(void)
+static void cubebase(double size)
 {
 
 	glBegin(GL_QUADS);
-	glVertex3d(-0.5, -0.5, -0.5);
-	glVertex3d(-0.5, 0.5, -0.5);
-	glVertex3d(0.5, 0.5, -0.5);
-	glVertex3d(0.5, -0.5, -0.5);
+	glVertex3d(-size/2, -size / 2, -size / 2);
+	glVertex3d(-size / 2, size / 2, -size / 2);
+	glVertex3d(size / 2, size / 2, -size / 2);
+	glVertex3d(size / 2, -size / 2, -size / 2);
 	glEnd();
 }
 
 //cubebase함수에서 그린 사각형을 회전 및 이동시켜
 //큐브를 완성시킨다.
-void draw_cube()
+void draw_cube(double size)
 {
 	glPushMatrix();
 
 	glColor3f(0.0f, 1.0f, 0.0f);     // Green, -Z축 방향
-	cubebase();
+	cubebase(size);
 
 	glPushMatrix();
 
-	glTranslated(1.0, 0.0, 0.0);
+	glTranslated(size, 0.0, 0.0);
 	glRotated(90.0, 0.0, 1.0, 0.0);
 	glColor3f(0.0f, 0.0f, 1.0f);     // Blue, +X축 방향
-	cubebase();
+	cubebase(size);
 
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(-1.0, 0.0, 0.0);
+	glTranslated(-size, 0.0, 0.0);
 	glRotated(-90.0, 0.0, 1.0, 0.0);
 	glColor3f(1.0f, 0.5f, 0.0f);     // Orange, -X축 방향
-	cubebase();
+	cubebase(size);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(0.0, 1.0, 0.0);
+	glTranslated(0.0, size, 0.0);
 	glRotated(-90.0, 1.0, 0.0, 0.0);
 	glColor3f(1.0f, 0.0f, 0.0f);     // Red, +Y축 방향
-	cubebase();
+	cubebase(size);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(0.0, -1.0, 0.0);
+	glTranslated(0.0, -size, 0.0);
 	glRotated(90.0, 1.0, 0.0, 0.0);
 	glColor3f(1.0f, 1.0f, 0.0f);     // Yellow, -Y축 방향
-	cubebase();
+	cubebase(size);
 	glPopMatrix();
 
 	glBegin(GL_QUADS);
 	glColor3f(1.0f, 0.0f, 1.0f);     // Magenta, +Z축 방향
-	glVertex3d(-0.5, -0.5, 0.5);
-	glVertex3d(0.5, -0.5, 0.5);
-	glVertex3d(0.5, 0.5, 0.5);
-	glVertex3d(-0.5, 0.5, 0.5);
+	glVertex3d(-size/2, -size / 2, size / 2);
+	glVertex3d(size / 2, -size / 2, size / 2);
+	glVertex3d(size / 2, size / 2, size / 2);
+	glVertex3d(-size / 2, size / 2, size / 2);
 	glEnd();
 
 	glPopMatrix();
@@ -102,36 +102,6 @@ void draw_cube()
 	glFlush();
 }
 
-void draw_line()
-{
-
-	glPushMatrix(); //X축 붉은색
-	glColor3f(1.0, 0.0, 0.0);
-	glBegin(GL_LINES);
-	glVertex3f(1.0, 0.0, 0.0);
-	glVertex3f(-1.0, 0.0, 0.0);
-	glEnd();
-	glPopMatrix();
-
-	glPushMatrix(); //Y축 녹색
-	glColor3f(0.0, 1.0, 0.0);
-	glBegin(GL_LINES);
-	glVertex3f(0.0, 1.0, 0.0);
-	glVertex3f(0.0, -1.0, 0.0);
-	glEnd();
-	glPopMatrix();
-
-	glPushMatrix(); //Z축 파란색
-	glColor3f(0.0, 0.0, 1.0);
-	glBegin(GL_LINES);
-	glVertex3f(0.0, 0.0, 1.0);
-	glVertex3f(0.0, 0.0, -1.0);
-	glEnd();
-	glPopMatrix();
-
-
-	glFlush();
-}
 
 // 카메라 초기화
 void cameraInit()
@@ -174,9 +144,8 @@ void display()
 		glDisable(GL_TEXTURE_2D);
 		glPushMatrix();
 		glTranslatef((hp.center.x-320)*0.01, (hp.center.y-240)*-0.01, -5.712);
-		glRotatef(cubeAngle, 1.0, 1.0, 1.0);
-		draw_cube(); //큐브
-		draw_line();  //좌표축
+		glRotatef(hp.rotateXY-90, 0, 0, -1.0);
+		draw_cube(hp.Slength*0.005); //큐브
 		glPopMatrix();
 	}
 	//cout << hp.center;
