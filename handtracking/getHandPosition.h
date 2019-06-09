@@ -227,7 +227,6 @@ private :
 		int crosscount = checkcross(scale, crossPoints);
 		int over120 = 0; //120도 넘는게 2개는 있어야 통과
 
-		cout << "또?;";
 		while (crosscount < 2)
 		{
 			scale += 0.3;
