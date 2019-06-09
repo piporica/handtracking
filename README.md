@@ -1,2 +1,3 @@
 # handtracking
-컬러카메라 기반 손 검출 
+컬러카메라 기반 손 검출
+opencv 
