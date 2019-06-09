@@ -1,0 +1,9 @@
+﻿handtracking.obj : error LNK2019: "void __cdecl cv::fastFree(void *)" (?fastFree@cv@@YAXPAX@Z) 외부 기호(참조 위치: "public: __thiscall cv::Mat::~Mat(void)" (??1Mat@cv@@QAE@XZ) 함수)에서 확인하지 못했습니다.
+handtracking.obj : error LNK2019: "void __cdecl cv::error(int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,char const *,char const *,int)" (?error@cv@@YAXHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PBD1H@Z) 외부 기호(참조 위치: "public: int const & __thiscall cv::MatSize::operator[](int)const " (??AMatSize@cv@@QBEABHH@Z) 함수)에서 확인하지 못했습니다.
+handtracking.obj : error LNK2019: "public: void __thiscall cv::Mat::deallocate(void)" (?deallocate@Mat@cv@@QAEXXZ) 외부 기호(참조 위치: "public: void __thiscall cv::Mat::release(void)" (?release@Mat@cv@@QAEXXZ) 함수)에서 확인하지 못했습니다.
+handtracking.obj : error LNK2019: "public: void __thiscall cv::Mat::copySize(class cv::Mat const &)" (?copySize@Mat@cv@@QAEXABV12@@Z) 외부 기호(참조 위치: "public: __thiscall cv::Mat::Mat(class cv::Mat const &)" (??0Mat@cv@@QAE@ABV01@@Z) 함수)에서 확인하지 못했습니다.
+handtracking.obj : error LNK2019: "public: __thiscall cv::VideoCapture::VideoCapture(int,int)" (??0VideoCapture@cv@@QAE@HH@Z) 외부 기호(참조 위치: "void __cdecl cameraInit(void)" (?cameraInit@@YAXXZ) 함수)에서 확인하지 못했습니다.
+handtracking.obj : error LNK2019: "void __cdecl cv::cvtColor(class cv::debug_build_guard::_InputArray const &,class cv::debug_build_guard::_OutputArray const &,int,int)" (?cvtColor@cv@@YAXABV_InputArray@debug_build_guard@1@ABV_OutputArray@31@HH@Z) 외부 기호(참조 위치: "void __cdecl timer(int)" (?timer@@YAXH@Z) 함수)에서 확인하지 못했습니다.
+D:\mine\opencv\sources\opencv\build\x64\vc16\lib\opencv_world410d.lib : warning LNK4272: 'x64' 라이브러리 컴퓨터 종류가 'x86' 대상 컴퓨터 종류와 충돌합니다.
+.\lib\glew32.lib : warning LNK4272: 'x64' 라이브러리 컴퓨터 종류가 'x86' 대상 컴퓨터 종류와 충돌합니다.
+C:\Users\r_bre\source\repos\handtracking\Debug\handtracking.exe : fatal error LNK1120: 6개의 확인할 수 없는 외부 참조입니다.
