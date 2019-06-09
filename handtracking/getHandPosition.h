@@ -1,8 +1,6 @@
 #pragma once
 #include "header.h"
 
-
-
 class handpos
 {
 private :
@@ -268,13 +266,11 @@ private :
 		RotatedRect rect;
 		if (rimit != 0)
 		{
-			cout << "¶Ç1;";
 			cutcunvexhull(crossPoints, cut);
 			rect = minAreaRect(cut);
 		}
 		else
 		{
-			cout << "¶Ç2;";
 			rect = minAreaRect(_selecthull);
 		}
 

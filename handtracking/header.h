@@ -36,3 +36,36 @@ struct handPosition
 	double rotateXY; //평면상에서 얼마나 돌아갔는지
 	double rotateZ; //돌아간 방향으로의 회전
 };
+
+
+//각도 튀는거 방지
+double prevangle;
+int anglecount = -1;
+
+//obj 읽기 관련
+
+struct Vertex {
+	float X;
+	float Y;
+	float Z;
+	int index_1;
+	int index_2;
+	int index_3;
+};
+
+struct MMesh {
+	int V1;
+	int V2;
+	int V3;
+	int V4;
+	int T1;
+	int T2;
+	int T3;
+	int T4;
+};
+
+Vertex* vertex;
+Vertex* vertex_color;
+MMesh* mymesh;
+
+GLubyte mytexels[1024][1024][3];
